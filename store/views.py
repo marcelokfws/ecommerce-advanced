@@ -1,5 +1,11 @@
-from django.shortcuts import get_object_or_404, render
+from django.contrib import messages
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.db.models import Q
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
 
+from carts.models import CartItem
+from carts.views import _cart_id
 from category.models import Category
 from store.models import Product
 
@@ -13,13 +19,22 @@ def store(request, category_slug=None):
         products = Product.objects.filter(
             category=categories, is_available=True)
         product_count = products.count()
+        paginator = Paginator(products, 1)
+        page = request.GET.get('page')
+        paged_products = paginator.get_page(page)
+        product_count = products.count()
 
     else:
 
         products = Product.objects.all().filter(is_available=True)
         product_count = products.count()
+        paginator = Paginator(products, 3)
+        page = request.GET.get('page')
+        paged_products = paginator.get_page(page)
+        product_count = products.count()
+
     context = {
-        'products': products,
+        'products': paged_products,
         'product_count': product_count,
 
     }
@@ -30,7 +45,14 @@ def product_detail(request, category_slug, product_slug):
     try:
         single_product = Product.objects.get(
             category__slug=category_slug, slug=product_slug)
+        in_cart = CartItem.objects.filter(
+            cart__cart_id=_cart_id(request), product=single_product).exists()
+
     except Exception as e:
         raise e
-    return render(request, 'store/product_detail.html', {
-        'single_product': single_product})
+
+    context = {
+        'single_product': single_product,
+        'in_cart': in_cart,
+    }
+    return render(request, 'store/product_detail.html', context)
