@@ -105,11 +105,12 @@ def place_order(request, total=0, quantity=0,):
             data.last_name = form.cleaned_data['last_name']
             data.phone = form.cleaned_data['phone']
             data.email = form.cleaned_data['email']
-            data.address_line_1 = form.cleaned_data['address_line_1']
-            data.address_line_2 = form.cleaned_data['address_line_2']
             data.country = form.cleaned_data['country']
             data.state = form.cleaned_data['state']
             data.city = form.cleaned_data['city']
+            data.neighborhood = form.cleaned_data['neighborhood']
+            data.street = form.cleaned_data['street']
+            data.number = form.cleaned_data['number']
             data.order_note = form.cleaned_data['order_note']
             data.order_total = grand_total
             data.tax = tax
