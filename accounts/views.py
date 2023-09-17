@@ -5,7 +5,6 @@ from django.contrib.auth.tokens import default_token_generator
 # Verification email
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
-from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
@@ -42,7 +41,7 @@ def register(request):
 
             # USER ACTIVATION
             current_site = get_current_site(request)
-            mail_subject = 'Please activate your account'
+            mail_subject = 'Por favor, ative sua conta'
             message = render_to_string('accounts/account_verification_email.html', {
                 'user': user,
                 'domain': current_site,
@@ -111,7 +110,7 @@ def login(request):
             except:
                 pass
             auth.login(request, user)
-            messages.success(request, 'You are now logged in.')
+            messages.success(request, 'Agora você está logado.')
             url = request.META.get('HTTP_REFERER')
             try:
                 query = requests.utils.urlparse(url).query
@@ -123,7 +122,7 @@ def login(request):
             except:
                 return redirect('dashboard')
         else:
-            messages.error(request, 'Invalid login credentials')
+            messages.error(request, 'Credenciais de login inválidas')
             return redirect('login')
     return render(request, 'accounts/login.html')
 
@@ -131,7 +130,7 @@ def login(request):
 @login_required(login_url='login')
 def logout(request):
     auth.logout(request)
-    messages.success(request, 'You are logged out.')
+    messages.success(request, 'Você está desconectado.')
     return redirect('login')
 
 
@@ -146,10 +145,10 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.save()
         messages.success(
-            request, 'Congratulations! Your account is activated.')
+            request, 'Parabéns! Sua conta está ativada.')
         return redirect('login')
     else:
-        messages.error(request, 'Invalid activation link')
+        messages.error(request, 'Link de ativação inválido')
         return redirect('register')
 
 
@@ -175,7 +174,7 @@ def forgotPassword(request):
 
             # Reset password email
             current_site = get_current_site(request)
-            mail_subject = 'Reset Your Password'
+            mail_subject = 'Redefinir sua Senha'
             message = render_to_string('accounts/reset_password_email.html', {
                 'user': user,
                 'domain': current_site,
@@ -187,10 +186,10 @@ def forgotPassword(request):
             send_email.send()
 
             messages.success(
-                request, 'Password reset email has been sent to your email address.')
+                request, 'O e-mail de redefinição de senha foi enviado para seu endereço de e-mail.')
             return redirect('login')
         else:
-            messages.error(request, 'Account does not exist!')
+            messages.error(request, 'Conta não existe!')
             return redirect('forgotPassword')
     return render(request, 'accounts/forgotPassword.html')
 
@@ -204,10 +203,10 @@ def resetpassword_validate(request, uidb64, token):
 
     if user is not None and default_token_generator.check_token(user, token):
         request.session['uid'] = uid
-        messages.success(request, 'Please reset your password')
+        messages.success(request, 'Redefina sua senha')
         return redirect('resetPassword')
     else:
-        messages.error(request, 'This link has been expired!')
+        messages.error(request, 'Este link expirou!')
         return redirect('login')
 
 
@@ -221,10 +220,10 @@ def resetPassword(request):
             user = Account.objects.get(pk=uid)
             user.set_password(password)
             user.save()
-            messages.success(request, 'Password reset successful')
+            messages.success(request, 'Redefinição de senha bem-sucedida')
             return redirect('login')
         else:
-            messages.error(request, 'Password do not match!')
+            messages.error(request, 'A senha não coincide!')
             return redirect('resetPassword')
     else:
         return render(request, 'accounts/resetPassword.html')
@@ -250,7 +249,7 @@ def edit_profile(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, 'Your profile has been updated.')
+            messages.success(request, 'Seu perfil foi atualizado.')
             return redirect('edit_profile')
     else:
         user_form = UserForm(instance=request.user)
@@ -278,13 +277,13 @@ def change_password(request):
                 user.set_password(new_password)
                 user.save()
                 # auth.logout(request)
-                messages.success(request, 'Password updated successfully.')
-                return redirect('change_password')
+                messages.success(request, 'Senha atualizada com êxito.')
+                return redirect('dashboard')
             else:
-                messages.error(request, 'Please enter valid current password')
+                messages.error(request, 'Introduza uma senha atual válida')
                 return redirect('change_password')
         else:
-            messages.error(request, 'Password does not match!')
+            messages.error(request, 'A senha não coincide!')
             return redirect('change_password')
     return render(request, 'accounts/change_password.html')
 

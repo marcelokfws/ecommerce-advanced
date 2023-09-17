@@ -5,11 +5,11 @@ from .models import Account, UserProfile
 
 class RegistrationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(attrs={
-        'placeholder': 'Enter Password',
+        'placeholder': 'Crie uma Senha',
         'class': 'form-control',
     }))
     confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={
-        'placeholder': 'Confirm Password'
+        'placeholder': 'Confirme a Senha'
     }))
 
     class Meta:
@@ -29,10 +29,10 @@ class RegistrationForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(RegistrationForm, self).__init__(*args, **kwargs)
-        self.fields['first_name'].widget.attrs['placeholder'] = 'Enter First Name'
-        self.fields['last_name'].widget.attrs['placeholder'] = 'Enter last Name'
-        self.fields['phone_number'].widget.attrs['placeholder'] = 'Enter Phone Number'
-        self.fields['email'].widget.attrs['placeholder'] = 'Enter Email Address'
+        self.fields['first_name'].widget.attrs['placeholder'] = 'Digite o Primeiro Nome'
+        self.fields['last_name'].widget.attrs['placeholder'] = 'Digite o Sobrenome'
+        self.fields['phone_number'].widget.attrs['placeholder'] = 'Telefone (DDD)xxxxxxxxx'
+        self.fields['email'].widget.attrs['placeholder'] = 'Digite o Email'
         for field in self.fields:
             self.fields[field].widget.attrs['class'] = 'form-control'
 

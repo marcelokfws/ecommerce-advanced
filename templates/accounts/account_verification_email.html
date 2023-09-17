@@ -1,10 +1,10 @@
 {% autoescape off %}
 
-Hi {{user.first_name}},
+Olá {{user.first_name}},
 
-Please click on below link to confirm your registration.
+Clique no link abaixo para confirmar sua inscrição.
 http://{{domain}}{% url 'activate' uidb64=uid token=token %}
 
-If you think it's not you, please ignore this email.
+Se você acha que não é você, por favor, ignore este e-mail.
 
 {% endautoescape %}

@@ -13,16 +13,16 @@
 	<aside class="col-lg-6">
 <div class="card">
   <div class="card-body">
-    <h4 class="card-title mb-4">Billing Address</h4>
+    <h4 class="card-title mb-4">Endereço de Faturamento</h4>
     <form action="{% url 'place_order' %}" method="POST">
       {% csrf_token %}
       <div class="form-row">
         <div class="col form-group">
-          <label for="">First Name</label>
+          <label for="">Nome</label>
           <input type="text" name="first_name" class="form-control" required>
         </div>
         <div class="col form-group">
-          <label for="">Last Name</label>
+          <label for="">Sobrenome</label>
           <input type="text" name="last_name" class="form-control" required>
         </div>
       </div>
@@ -32,45 +32,45 @@
           <input type="email" name="email" class="form-control" required>
         </div>
         <div class="col form-group">
-          <label for="">Phone Number</label>
+          <label for="">Telefone</label>
           <input type="text" name="phone" class="form-control" required>
         </div>
       </div>
     
       <div class="form-row">
         <div class="col form-group">
-          <label for="">Street</label>
+          <label for="">Rua</label>
           <input type="text" name="street" class="form-control" required>
         </div>
       
         <div class="col form-group">
-          <label for="">Number</label>
+          <label for="">Número</label>
           <input type="text" name="number" class="form-control" required>
         </div>
       </div>
         
       <div class="form-row">
         <div class="col form-group">
-          <label for="">Neighborhood</label>
+          <label for="">Bairro</label>
           <input type="text" name="neighborhood" class="form-control" required>
         </div>
         <div class="col form-group">
-          <label for="">City</label>
+          <label for="">Cidade</label>
           <input type="text" name="city" class="form-control" required>
         </div>
       </div>
       <div class="form-row">
         <div class="col form-group">
-          <label for="">State</label>
+          <label for="">Estado</label>
           <input type="text" name="state" class="form-control" required>
         </div>
         <div class="col form-group">
-          <label for="">Country</label>
+          <label for="">País</label>
           <input type="text" name="country" class="form-control" required>
         </div>
       </div>
         <div class="form-row">
-          <label for="">Order Note</label>
+          <label for="">Ordem Nota</label>
           <textarea name="order_note" rows="2" class="form-control"></textarea>
         </div>
   </div>
@@ -84,9 +84,9 @@
       <table class="table table-borderless table-shopping-cart">
       <thead class="text-muted">
       <tr class="small text-uppercase">
-        <th scope="col">Product</th>
-        <th scope="col" width="120">Quantity</th>
-        <th scope="col" width="120">Price</th>
+        <th scope="col">Produto</th>
+        <th scope="col" width="120">Quantidade</th>
+        <th scope="col" width="120">Preço</th>
 
       </tr>
       </thead>
@@ -115,8 +115,8 @@
       	</td>
       	<td>
       		<div class="price-wrap">
-      			<var class="price">$ {{ cart_item.sub_total }}</var>
-      			<small class="text-muted"> $ {{ cart_item.product.price }} each </small>
+      			<var class="price">R$ {{ cart_item.sub_total }}</var>
+      			<small class="text-muted"> R$ {{ cart_item.product.price }} cada </small>
       		</div> <!-- price-wrap .// -->
       	</td>
 
@@ -126,8 +126,8 @@
       </tbody>
       </table>
 
-      <button type="submit" name="submit" class="btn btn-primary btn-block">Place Order</button>
-			<a href="{% url 'store' %}" class="btn btn-light btn-block">Continue Shopping</a>
+      <button type="submit" name="submit" class="btn btn-primary btn-block">Finalizar Pedido</button>
+			<a href="{% url 'store' %}" class="btn btn-light btn-block">Continue Comprando</a>
       </form>
 		</div> <!-- card-body.// -->
 		</div> <!-- card.// -->

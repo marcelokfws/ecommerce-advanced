@@ -8,12 +8,12 @@
 	<div class="container">
 
 		<!-- ============================ COMPONENT 1 ================================= -->
-		<h4 class="text-center mb-20">Review Your Order and Make Payment</h4>
+		<h4 class="text-center mb-20">Revise seu pedido e faça o pagamento</h4>
 		<div class="row">
 
 			<aside class="col-lg-8">
 				<div class="card">
-					<h5 class="card-header">Billing Address</h5>
+					<h5 class="card-header">Endereço de cobrança</h5>
 					<div class="card-body">
 						<p class="card-text mb-0">Nome: {{order.full_name}}</p><br>
 						<p class="card-text mb-0">Rua: {{order.street}}
@@ -24,28 +24,28 @@
 						<p class="card-text mb-0">E-mail: {{order.email}}</p><br>
 						<p class="card-text mb-0">Telefone: {{order.phone}}</p><br>
 						{% if order.order_note %}
-						<b>Order Note: </b> {{order.order_note}}
+						<b>Ordem Nota: </b> {{order.order_note}}
 						{% endif %}
 
 
 					</div>
 				</div>
 				<div class="card">
-					<h5 class="card-header">Payment Method</h5>
+					<h5 class="card-header">Método de Pagamento</h5>
 					<div class="card-body">
 						<p class="card-text">PayPal</p>
 
 					</div>
 				</div>
 				<div class="card">
-					<h5 class="card-header">Review Products</h5>
+					<h5 class="card-header">Revisão de Produtos</h5>
 					<div class="card-body">
 						<table class="table table-borderless table-shopping-cart">
 							<thead class="text-muted">
 								<tr class="small text-uppercase">
-									<th scope="col">Product</th>
-									<th scope="col" width="120">Quantity</th>
-									<th scope="col" width="120">Price</th>
+									<th scope="col">Produto</th>
+									<th scope="col" width="120">Quantidade</th>
+									<th scope="col" width="120">Preço</th>
 
 								</tr>
 							</thead>
@@ -74,8 +74,8 @@
 									</td>
 									<td>
 										<div class="price-wrap">
-											<var class="price">$ {{ cart_item.sub_total }}</var>
-											<small class="text-muted"> $ {{ cart_item.product.price }} each </small>
+											<var class="price">R$ {{ cart_item.sub_total }}</var>
+											<small class="text-muted"> R$ {{ cart_item.product.price_format }} cada </small>
 										</div> <!-- price-wrap .// -->
 									</td>
 
@@ -94,15 +94,15 @@
 				<div class="card">
 					<div class="card-body">
 						<dl class="dlist-align">
-							<dt>Total price:</dt>
-							<dd class="text-right">$ {{total}}</dd>
+							<dt>Preço Total:</dt>
+							<dd class="text-right">R$ {{total}}</dd>
 						</dl>
 						<dl class="dlist-align">
 							<dt>Tax:</dt>
-							<dd class="text-right"> $ {{tax}}</dd>
+							<dd class="text-right"> R$ {{tax}}</dd>
 						</dl>
 						<dl class="dlist-align">
-							<dt>Grand Total:</dt>
+							<dt>Preço Final:</dt>
 							<dd class="text-right text-dark b"><strong>$ {{grand_total}}</strong></dd>
 						</dl>
 						<hr>
@@ -117,9 +117,7 @@
 
 					</div> <!-- card-body.// -->
 				</div> <!-- card.// -->
-				<div class="alert alert-danger" role="alert">
-				  <b>Please Note: </b>This is a demo website. Do not try to make real payments.
-				</div>
+				
 			</aside> <!-- col.// -->
 
 

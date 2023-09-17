@@ -54,6 +54,9 @@ class Order(models.Model):
     def __str__(self):
         return self.first_name
 
+    def _tax(self):
+        return f'{self.tax}'.replace('.', ',')
+
 
 class OrderProduct(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
