@@ -41,7 +41,6 @@ class Order(models.Model):
     number = models.CharField(max_length=50)
     order_note = models.CharField(max_length=100, blank=True)
     order_total = models.FloatField()
-    tax = models.FloatField()
     status = models.CharField(max_length=10, choices=STATUS, default='New')
     ip = models.CharField(blank=True, max_length=20)
     is_ordered = models.BooleanField(default=False)
@@ -54,8 +53,8 @@ class Order(models.Model):
     def __str__(self):
         return self.first_name
 
-    def _tax(self):
-        return f'{self.tax}'.replace('.', ',')
+    def order_total_(self):
+        return f'{self.order_total:.2f}'.replace('.', ',')
 
 
 class OrderProduct(models.Model):
@@ -73,3 +72,6 @@ class OrderProduct(models.Model):
 
     def __str__(self):
         return self.product.product_name
+
+    def product_price_(self):
+        return f'{self.product_price:.2f}'.replace('.', ',')

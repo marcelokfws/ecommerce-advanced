@@ -67,23 +67,15 @@
                                           				</p>
                                                 </td>
                                                 <td class="text-center">{{item.quantity}}</td>
-                                                <td class="text-center">R${{item.product_price}} Reais</td>
+                                                <td class="text-center">R${{item.product_price_}} Reais</td>
                                             </tr>
                                           {% endfor %}
                                         </tbody>
                                         <tfoot>
-                                            <tr>
-                                                <th colspan="2" class="text-right">Preço Total:</th>
-                                                <th class="text-center">R${{subtotal}} Reais</th>
-                                            </tr>
-                                            <tr>
-                                                <th colspan="2" class="text-right">Taxa:</th>
-                                                <th class="text-center">R${{order.tax}} Reais</th>
-                                            </tr>
-
+                                           
                                             <tr>
                                                 <th colspan="2" class="text-right">Preço Final:</th>
-                                                <th class="text-center">R${{order.order_total}} Reais</th>
+                                                <th class="text-center">R${{order.order_total_}} Reais</th>
                                             </tr>
                                         </tfoot>
                                     </table>

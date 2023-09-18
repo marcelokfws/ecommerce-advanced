@@ -2,7 +2,7 @@ import datetime
 import json
 
 from django.core.mail import EmailMessage
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 
@@ -80,20 +80,18 @@ def payments(request):
 
 def place_order(request, total=0, quantity=0,):
     current_user = request.user
-
+    grand_total = 0
     # If the cart count is less than or equal to 0, then redirect back to shop
     cart_items = CartItem.objects.filter(user=current_user)
     cart_count = cart_items.count()
     if cart_count <= 0:
         return redirect('store')
 
-    grand_total = 0
-    tax = 0
     for cart_item in cart_items:
         total += (cart_item.product.price * cart_item.quantity)
         quantity += cart_item.quantity
-    tax = (2 * total)/100
-    grand_total = total + tax
+
+    grand_total = total
 
     if request.method == 'POST':
         form = OrderForm(request.POST)
@@ -113,7 +111,6 @@ def place_order(request, total=0, quantity=0,):
             data.number = form.cleaned_data['number']
             data.order_note = form.cleaned_data['order_note']
             data.order_total = grand_total
-            data.tax = tax
             data.ip = request.META.get('REMOTE_ADDR')
             data.save()
             # Generate order number
@@ -132,7 +129,6 @@ def place_order(request, total=0, quantity=0,):
                 'order': order,
                 'cart_items': cart_items,
                 'total': total,
-                'tax': tax,
                 'grand_total': grand_total,
             }
             return render(request, 'orders/payments.html', context)
