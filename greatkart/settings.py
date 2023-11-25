@@ -30,7 +30,7 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=True, cast=bool)  # True
 
 ALLOWED_HOSTS = [
-    '3.133.158.210', "*"]
+    '3.140.109.242', "*"]
 
 
 # Application definition
