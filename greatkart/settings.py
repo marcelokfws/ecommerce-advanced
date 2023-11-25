@@ -30,7 +30,7 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=True, cast=bool)  # True
 
 ALLOWED_HOSTS = [
-    'greatkart-course-env.eba-pepcery4.us-west-2.elasticbeanstalk.com', "*"]
+    '3.133.158.210', "*"]
 
 
 # Application definition
