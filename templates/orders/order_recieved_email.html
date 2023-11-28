@@ -1,10 +1,9 @@
-{% autoescape off %}
 {% extends 'base.html' %}
 {% load static %}
 
 
 {% block content %}
-
+{% autoescape off %}
 
 <div class="container" style="margin-top: 50px;">
     <center><i class="fas fa-check-circle" style="font-size: 72px;margin-bottom: 20px;color: #28A745;"></i></center>
@@ -107,7 +106,6 @@
     </div>
     </div>
 
-
+{% endautoescape %}
 {% endblock %}
 
-{% endautoescape %}
