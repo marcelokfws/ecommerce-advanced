@@ -142,3 +142,15 @@ pip install gunicorn
 ## Configurando o nginx
 
 Use o arquivo e as explicações disponibilizadas na aula.
+
+# link simbólico site-enabled
+
+sudo ln -s /etc/nginx/sites-available/ecommerce /etc/nginx/sites-enabled/ecommerce
+
+# testando configuração
+
+sudo nginx -t
+
+# reicinicar nginx 
+
+sudo systemctl restart nginx
